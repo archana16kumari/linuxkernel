@@ -1,0 +1,66 @@
+From 421d77f272eb71fb9435f537d23af4ba23dd7f96 Mon Sep 17 00:00:00 2001
+From: Archana kumari <archanakumari959@gmail.com>
+Date: Fri, 11 Oct 2013 20:14:55 +0530
+Subject: [PATCH v3] staging: btmtk_usb: braces {} are not necessary for single
+ statement in btmtk_usb.c
+
+Fix checkpatch.pl issues with braces {} are not necessary
+for single statement blocks in btmtk_usb.c
+
+Signed-off-by: Archana kumari <archanakumari959@gmail.com>
+---
+---
+ drivers/staging/btmtk_usb/btmtk_usb.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/staging/btmtk_usb/btmtk_usb.c b/drivers/staging/btmtk_usb/btmtk_usb.c
+index 0e783e8..86b247c 100644
+--- a/drivers/staging/btmtk_usb/btmtk_usb.c
++++ b/drivers/staging/btmtk_usb/btmtk_usb.c
+@@ -241,9 +241,8 @@ static u16 checksume16(u8 *pData, int len)
+ 	if (len)
+ 		sum += *((u8 *)pData);
+ 
+-	while (sum >> 16) {
++	while (sum >> 16)
+ 		sum = (sum & 0xFFFF) + (sum >> 16);
+-	}
+ 
+ 	return ~sum;
+ }
+@@ -262,9 +261,8 @@ static int btmtk_usb_chk_crc(struct btmtk_usb_data *data, u32 checksum_len)
+ 						  0x20, 0x00, data->io_buf, 8,
+ 						  CONTROL_TIMEOUT_JIFFIES);
+ 
+-	if (ret < 0) {
++	if (ret < 0)
+ 		BT_ERR("%s error(%d)\n", __func__, ret);
+-	}
+ 
+ 	return ret;
+ }
+@@ -670,9 +668,8 @@ loadfw_protect:
+ 			/* U2M_PDMA descriptor */
+ 			btmtk_usb_io_write32(data, 0x230, cur_len);
+ 
+-			while ((sent_len % 4) != 0) {
++			while ((sent_len % 4) != 0)
+ 				sent_len++;
+-			}
+ 
+ 			/* U2M_PDMA length */
+ 			btmtk_usb_io_write32(data, 0x234, sent_len << 16);
+@@ -921,9 +918,8 @@ static void btmtk_usb_bulk_in_complete(struct urb *urb)
+ 	BT_DBG("%s:%s urb %p status %d count %d", __func__, hdev->name,
+ 					urb, urb->status, urb->actual_length);
+ 
+-	if (!test_bit(HCI_RUNNING, &hdev->flags)) {
++	if (!test_bit(HCI_RUNNING, &hdev->flags))
+ 		return;
+-	}
+ 
+ 	if (urb->status == 0) {
+ 		hdev->stat.byte_rx += urb->actual_length;
+-- 
+1.8.1.2
+
