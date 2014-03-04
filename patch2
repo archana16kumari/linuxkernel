@@ -1,0 +1,37 @@
+
+m a503d374935cd05b33497c4c090ba5a6dafe561a Mon Sep 17 00:00:00 2001
+From: Archana kumari <archanakumari959@gmail.com>
+Date: Mon, 4 Nov 2013 11:43:18 +0530
+Subject: [PATCH] staging: ced1401: fixed "Use of volatile is usually wrong"
+ warning in usb1401.h
+
+This patch "Use of volatile is usually wrong" warning in usb1401.h
+
+Signed-off-by: Archana kumari <archanakumari959@gmail.com>
+---
+ drivers/staging/ced1401/usb1401.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/staging/ced1401/usb1401.h b/drivers/staging/ced1401/usb1401.h
+index f031e3a..36fb59b 100644
+--- a/drivers/staging/ced1401/usb1401.h
++++ b/drivers/staging/ced1401/usb1401.h
+@@ -154,11 +154,11 @@ typedef struct _DEVICE_EXTENSION {
+ 	spinlock_t charInLock;              /* to protect the inputBuffer and char reads */
+ 	__u8 bInterval;                     /* Interrupt end point interval */
+ 
+-	volatile unsigned int dwDMAFlag;    /* state of DMA */
++	unsigned int dwDMAFlag;    /* state of DMA */
+ 	TRANSAREA rTransDef[MAX_TRANSAREAS];/* transfer area info */
+-	volatile DMADESC rDMAInfo;          /*  info on current DMA transfer */
+-	volatile bool bXFerWaiting;         /*  Flag set if DMA transfer stalled */
+-	volatile bool bInDrawDown;          /*  Flag that we want to halt transfers */
++	DMADESC rDMAInfo;          /*  info on current DMA transfer */
++	bool bXFerWaiting;         /*  Flag set if DMA transfer stalled */
++	bool bInDrawDown;          /*  Flag that we want to halt transfers */
+ 
+ 	/*  Parameters relating to a block read\write that is in progress. Some of these values */
+ 	/*   are equivalent to values in rDMAInfo. The values here are those in use, while those */
+-- 
+1.8.1.2
+
